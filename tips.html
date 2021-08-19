@@ -1,0 +1,792 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>TIPS</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script> 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<style>
+	body{font-family: 'Roboto Condensed', sans-serif;font-size: 14px; color: #000;}
+	h1{font-size: 24px !important;margin-bottom: 20px;}
+	span{color:#999}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 text-center">
+				<h1><strong>--- WORDPRESS ---</strong></h1>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<p><strong>IMÁGENES EN EL THEME<br />
+				</strong>&lt;img src=&quot;&lt;?php bloginfo('template_url'); ?&gt;/images/foto.jpg&quot; alt=&quot;&quot; /&gt;</p>
+
+				<p><strong>QUERY POST CATEGORÍA</strong><br />
+				&lt;?php query_posts('category_name=concursos&amp;showposts=10'); ?&gt;<br />
+				&lt;?php while (have_posts()) : the_post(); ?&gt;<br />
+				&lt;?php the_title(); ?&gt;<br />&lt;?php the_post_thumbnail( array(290,99999) );?&gt;<br />
+				&lt;?php the_content('&amp;raquo; Sigue leyendo...') ?&gt;<br />
+				&lt;div class="edit"&gt;&lt;?php edit_post_link('Editar'); ?&gt;&lt;/div&gt;<br />
+				&lt;?php endwhile;?&gt;
+
+				<p><strong>QUERY POST PAGE</strong><br />
+				&lt;?php query_posts('page_id=2'); ?&gt;<br />
+				&lt;?php while (have_posts()) : the_post(); ?&gt;<br />
+				&lt;?php the_title(); ?&gt;<br />
+				&lt;?php the_content('') ?&gt;<br />
+				&lt;div class="edit"&gt;&lt;?php edit_post_link('Editar'); ?&gt;&lt;/div&gt;<br />
+				&lt;?php endwhile;?&gt;</p>
+
+				<p><strong>INCLUDES</strong><br />
+				&lt;?php include (TEMPLATEPATH . '/file.php'); ?&gt; <span>-&gt; sirve para el header también</span></p>
+
+				<p><strong>PAGE TEMPLATE</strong><br />
+				&lt;?php<br />
+				/* Template Name: Unete */<br />
+				?&gt;</p>
+			</div><!-- col -->
+
+			<div class="col-xs-12 col-sm-6">
+				<p><strong>ETIQUETAS VARIAS</strong><br />
+				&lt;?php query_posts($query_string . &quot;&amp;cat=-9,-10&quot;);?&gt; <span>- Excluir categorias en el index</span><br />
+				&lt;?php echo get_option('home'); ?&gt; <span>-Vinculo al Home</span><br />
+				&lt;?php the_time() ?&gt; <span>- Muestra la hora del post actual.</span><br />
+				&lt;?php the_date() ?&gt; <span>- Muestra la fecha de un post o un conjunto de posts.</span><br />
+				&lt;?php the_title(); ?&gt; <span>- Muestra el título del post actual.</span><br />
+				&lt;?php the_category() ?&gt; <span>- Muestra la categoría de un post con link.</span><br />
+				&lt;?php foreach((get_the_category()) as $category) { echo $category-&gt;cat_name . ' ';}?&gt; <span>- Muestra la categoría de un post sin link.</span><br />
+				&lt;?php the_author(); ?&gt; <span>- Muestra el autor de un post.</span><br />
+				&lt;?php the_ID(); ?&gt; <span>- Muestra el ID númerico del post actual</span><br />
+				&lt;?php wp_list_pages(); ?&gt; <span>- Muestra un listado con todas las páginas.</span><br />
+				&lt;?php wp_tag_cloud(); ?&gt; <span>- Muestra una nube de etiquetas (tag-cloud).</span><br />
+				&lt;?php wp_list_cats(); ?&gt; <span>- Muestra un listado de categorías.</span><br />
+				&lt;?php get_calendar(); ?&gt; <span>- Muestra el calendario.</span><br />
+				&lt;?php wp_get_archives() ?&gt; <span>- Muestra una lista de archivos basado en fecha.</span><br />
+				&lt;?php posts_nav_link(); ?&gt; <span>- Muestra los links de “Página Anterior” y “Página siguiente”.</span><br />
+				&lt;?php next_post_link() ?&gt; <span>- Muestra el enlace de “Siguiente Post”.</span><br />
+				&lt;?php previous_post_link() ?&gt; <span>- Muestra el enlace de “Anterior Post”.</span><br />
+				&lt;?php the_permalink() ?&gt; <span>- Muestra la URL para realizar el permalink.</span><br />
+				&lt;?php the_time('j F, Y') ?&gt; <span>- Muestra fecha dia mes, año</span><br />  
+				&lt;?php the_post_thumbnail( array(290,99999) );?&gt; <span>- Pega el thumbnail con 290 de ancho</span><br />
+				&lt;br /&gt; <span>- Salto de linea</span><br />
+				&amp;nbsp; <span>- Espacio</span></p>
+
+				<p><strong>RESETEAR QUERY</strong><br />
+				&lt;?php wp_reset_query(); ?&gt;</p>
+			</div>
+
+		</div><!-- row -->
+		<hr>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 text-center">
+				<h1><strong>--- ACF ---</strong></h1>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<p><strong>NORMAL FIELD</strong><br />
+				&lt;?php the_field('field_name');?&gt;</p>
+
+				<p><strong>REPEATER</strong><br />
+				&lt;?php if( have_rows('informacion') ): while( have_rows('informacion') ): the_row(); <br />
+				&nbsp;&nbsp;&nbsp;	$image = get_sub_field('imagen');<br />
+				&nbsp;&nbsp;&nbsp;	$content = get_sub_field('texto');<br />
+				&nbsp;&nbsp;&nbsp;	?&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&lt;div class="informacion"&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		&lt;div class="imagen"&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		&lt;img src="&lt;?php echo $image; ?&gt;" alt="" /&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		&lt;/div&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		&lt;div class="texto"&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		&lt;?php echo $content; ?&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		&lt;/div&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&lt;/div&gt;<br />
+				&lt;?php endwhile; endif; ?&gt;</p>
+
+				<p><strong>CHECKBOX</strong><br />
+				&lt;?php<br />
+				$colors = get_field('colors');<br />
+				if( $colors ): ?&gt;<br />
+				&lt;ul&gt;<br />
+				&nbsp;&nbsp;&nbsp;		&lt;?php foreach( $colors as $color ): ?&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			&lt;li&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			&lt;span class="color-&lt;?php echo $color['value']; ?&gt;"&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&lt;?php echo $color['label']; ?&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			&lt;/span&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			&lt;/li&gt;<br />
+				&nbsp;&nbsp;&nbsp;		&lt;?php endforeach; ?&gt;<br />
+				&lt;/ul&gt;<br />
+				&lt;?php endif; ?&gt;</p>
+
+				<p><strong>IMAGE</strong><br />
+				<span>En el plugin Image debe estar seleccionado como array</span><br />
+				&lt;?php <br />
+				$image = get_field('image');<br />
+				if( !empty($image) ): ?&gt;<br />
+				&nbsp;&nbsp;&nbsp;		&lt;img src="&lt;?php echo $image['url']; ?&gt;" alt="&lt;?php echo $image['alt']; ?&gt;" /&gt;<br />
+				&lt;?php endif; ?&gt;</p>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<p><strong>GALLERY</strong><br />
+				&lt;?php $images = get_field('galeria');<br />
+				if( $images ): ?&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&lt;?php foreach( $images as $image ): ?&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		 &lt;div class="img-gal"&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			 &lt;a href="&lt;?php echo $image['sizes']['large']; ?&gt;"&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			 &lt;img src="&lt;?php echo $image['sizes']['thumbnail']; ?&gt;" alt="" /&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			 &lt;/a&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		 &lt;/div&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&lt;?php endforeach; ?&gt;<br />
+				&lt;?php endif; ?&gt;</p>
+
+				<p><strong>RADIO BUTTON</strong><br />
+				&lt;?php $color = get_field('color');?&gt;<br />
+				&lt;p&gt;<br />
+				&nbsp;&nbsp;&nbsp;	Color: <br />
+				&nbsp;&nbsp;&nbsp;	&lt;span class="color-&lt;?php echo $color['value']; ?&gt;"&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		&lt;?php echo $color['label']; ?&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&lt;/span&gt;<br />
+				&lt;/p&gt;</p>
+
+				<p><strong>TRUE/FALSE</strong><br />
+				&lt;?php if( get_field('enable_sidebar') ): ?&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&lt;?php // do something ?&gt;<br />
+				&lt;?php endif; ?&gt;</p>
+
+				<p><strong>FILE</strong><br />
+				&lt;?php <br />
+				$file = get_field('file');<br />
+				if( $file ): ?&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&lt;a href="&lt;?php echo $file['url']; ?>"&gt;<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		&lt;?php echo $file['filename']; ?&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&lt;/a&gt;<br />
+				&lt;?php endif; ?&gt;</p>
+
+				<p><strong>GOOGLE MAPS</strong><br />
+				Ver documentación <a href="https://www.advancedcustomfields.com/resources/google-map/" target="_blank">aquí</a>
+				</p>
+
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 text-center">
+				<h1><strong>--- CSS ---</strong></h1>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<p><strong>CHILD CSS</strong><br />
+				:nth-child(odd)  <span>impares</span><br />
+				:nth-child(even) <span>pares</span><br />
+				:nth-child(3n+2) <span>2,5,8,11,etc</span><br />
+				:last-child  <span>ultimo</span></p>
+
+				<p><strong>INSERTAR TIPOGRAFÍA</strong><br />
+				@font-face {      
+				font-family: 'HelveticaNeueLight'; <br />     
+				src: url('../fonts/helveticaneue_light.eot');<br />   
+				src: url('../fonts/helveticaneue_light.eot?#iefix') format('embedded-opentype'),<br />          
+				url('../fonts/helveticaneue_light.woff') format('woff'),<br />         
+				url('../fonts/helveticaneue_light.ttf') format('truetype'),<br />       
+				url('../fonts/helveticaneue_light.svg#HelveticaNeueLight') format('svg');<br /> 
+				}</p>
+
+				<p><strong>CSS TRANSITION</strong><br />
+				-webkit-transition:all 0.25s ease-out;<br />
+				-o-transition:all 0.25s ease-out;<br />
+				-moz-transition:all 0.25s ease-out;<br />
+				-ms-transition:all 0.25s ease-out;<br />
+				transition:all 0.25s ease-out;</p>
+
+				<p><strong>CSS TRANSFORM</strong><br />
+				transform: translate(0,-100%);<br />
+				-webkit-transform: translate(0,-100%);<br />
+				-o-transform: translate(0,-100%);<br />
+				-moz-transform: translate(0,-100%);</p>
+
+				<p><strong>CSS FILTER (none | blur() | brightness() | contrast() | drop-shadow() | grayscale() | hue-rotate() | invert() | opacity() | saturate() | sepia() | url() )</strong><br />
+				-webkit-filter: brightness(100);<br />
+				-moz-filter: brightness(100);<br />
+				-ms-filter: brightness(100);<br />
+				-o-filter: brightness(100);<br />
+				filter: brightness(100);<br />
+				<br />
+				<span>Para agregar más de un filtro:</span><br />
+				brightness(100) opacity(100)</p>
+
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<p><strong>MASONRY</strong><br />
+				.masonry {<br />
+				&nbsp;&nbsp;&nbsp;    column-count: 3;<br />
+				&nbsp;&nbsp;&nbsp;	-webkit-column-count: 3;<br />
+				&nbsp;&nbsp;&nbsp;    -moz-column-count: 3;<br />
+				&nbsp;&nbsp;&nbsp;    column-gap: 1em;<br />
+				&nbsp;&nbsp;&nbsp;	-webkit-column-gap: 1em;<br />
+				&nbsp;&nbsp;&nbsp;    -moz-column-gap: 1em;<br />
+				}<br />
+				.item {<br />
+				&nbsp;&nbsp;&nbsp;    display: table;<br />
+				&nbsp;&nbsp;&nbsp;    margin: 0 0 1em;<br />
+				&nbsp;&nbsp;&nbsp;    width: 100%;<br />
+				}<br />
+
+				<p><strong>PLACEHOLDER</strong><br />
+				<span>Placeholder color de texto -- debe ir cada uno por separado para que funcione</span><br />
+				::-webkit-input-placeholder {<br />
+					color: #000;<br />
+				}<br />
+				:-moz-placeholder {<br />
+					color: #000;<br />
+				}<br />
+				::-moz-placeholder {<br />
+					color: #000;<br />
+				}<br />
+				:-ms-input-placeholder {<br />
+					color: #000;<br />
+				}</p>
+
+				<p><strong>ANCHO MÍNIMO CONTENIDO</strong><br>
+				<span>Ocupar los tres width</span><br />
+				width: min-content;<br>
+				width: -moz-min-content;<br>
+    			width: -webkit-min-content;</p>
+
+				<p><strong>ANCHO MÁXIMO CONTENIDO</strong><br>
+				<span>Ocupar los tres width</span><br />
+				width: max-content;<br>
+				width: -moz-max-content;<br>
+    			width: -webkit-max-content;</p>
+			</div>
+		</div>
+		<HR>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 text-center">
+				<h1><strong>--- HTML ---</strong></h1>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<p><strong>ANCLA</strong><br />
+				&lt;a href=&quot;#pregunta1&quot;&gt;1-. ¿Qué es el Testeo Animal en cosméticos?&lt;/a&gt;<br />
+				&lt;a name=&quot;pregunta1&quot;&gt;&lt;/a&gt;1-. ¿Qué es el Testeo Animal en cosméticos?</p>
+
+				<p><strong>IMÁGENES SE ACTUALICEN (CACHÉ)</strong><br />
+				<span>Agregar dentro &lt;head&gt;</span><br>
+				&lt;meta http-equiv="cache-control" content="max-age=0" /&gt;<br />
+				&lt;meta http-equiv="cache-control" content="no-cache" />&gt;<br />
+				&lt;meta http-equiv="expires" content="0" /&gt;<br />
+				&lt;meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" /&gt;<br />
+				&lt;meta http-equiv="pragma" content="no-cache" /&gt;</p>
+
+				<p><strong>MASONRY</strong><br />
+				&lt;div class="masonry"&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&lt;div class="item"&gt;&lt;/div&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&lt;div class="item"&gt;&lt;/div&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&lt;div class="item"&gt;&lt;/div&gt;<br />
+				&lt;/div&gt;</p>
+
+				<p><strong>BOTÓN VOLVER</strong><br />
+				&lt;button onclick=&quot;history.go(-1);&quot;&gt;Volver &lt;/button&gt;</p>
+
+				<p><strong>CARGAR CUSTOM POST TYPE</strong><br>
+				&lt;?php<br>
+				$vitrinas_args = array(<br>
+				&nbsp;&nbsp;&nbsp;	'post_type' 	   => 'vitrina', <span>Nombre del Custom Post Type</span><br>
+				&nbsp;&nbsp;&nbsp;	'order'			   => 'ASC', <span>ASC o DESC</span><br>
+				&nbsp;&nbsp;&nbsp;	'posts_per_page'   => 5, <span>-1 para cargar todos los existentes</span><br>
+				&nbsp;&nbsp;&nbsp;	'category'         => '',<br>
+				&nbsp;&nbsp;&nbsp;	'orderby'          => 'post_date' <span>ID, author, title, date, modified, rand (random), menu_order</span><br>
+				);<br>
+				&nbsp;&nbsp;&nbsp;	$vitrinas = new WP_Query($vitrinas_args);<br>
+				&nbsp;&nbsp;&nbsp;	while($vitrinas->have_posts()) : $vitrinas->the_post();<br>
+				?&gt;<br>
+				&lt;div&gt;&lt;/div&gt;<br>
+				&lt;?php  endwhile; ?&gt;</p>
+
+				<p><strong>CARGAR CUSTOM POST TYPE CON TAXONOMY</strong><br>
+				&lt;?php<br>
+				$vitrinas_args = array(<br>
+				&nbsp;&nbsp;&nbsp;	'post_type' 	   => 'vitrina', <span>Nombre del Custom Post Type</span><br>
+				&nbsp;&nbsp;&nbsp;	'order'			   => 'ASC', <span>ASC o DESC</span><br>
+				&nbsp;&nbsp;&nbsp;	'posts_per_page'   => 5, <span>-1 para cargar todos los existentes</span><br>
+				&nbsp;&nbsp;&nbsp;	'category'         => '',<br>
+				&nbsp;&nbsp;&nbsp;	'orderby'          => 'post_date', <span>ID, author, title, date, modified, rand (random), menu_order</span><br>
+				&nbsp;&nbsp;&nbsp;	'tax_query' => array(<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	array(<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		'taxonomy' => 'people', <span>Nombre del Custom Taxonomy</span><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		'field'    => 'slug',<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		'terms'    => 'action', <span>array( 'action', 'comedy' )</span><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	),<br>
+				&nbsp;&nbsp;&nbsp;	),<br>
+				);<br>
+				&nbsp;&nbsp;&nbsp;	$vitrinas = new WP_Query($vitrinas_args);<br>
+				&nbsp;&nbsp;&nbsp;	while($vitrinas->have_posts()) : $vitrinas->the_post();<br>
+				?&gt;<br>
+				&lt;div&gt;&lt;/div&gt;<br>
+				&lt;?php  endwhile; ?&gt;</p>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<p><strong>CARRUSEL BOOTSTRAP EN WP</strong><br />
+				&lt;div id="myCarousel" class="carousel slide" data-ride="carousel"&gt;<br />
+				<br />
+				&lt;ol class="carousel-indicators"&gt;<br />
+				&nbsp;&nbsp;&nbsp;		&lt;?php<br />
+				&nbsp;&nbsp;&nbsp;		$i = 0;<br />
+				&nbsp;&nbsp;&nbsp;		$slide_args = array(<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'post_type' => 'slide',<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'order'     => 'ASC',<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'post_per_page'=> '-1'<br />
+				&nbsp;&nbsp;&nbsp;		);<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			$slide = new WP_Query($slide_args);<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			while($slide->have_posts()) : $slide->the_post();<br />
+				&nbsp;&nbsp;&nbsp;		?&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			&lt;li data-target="#myCarousel" data-slide-to="&lt;?php echo $i; ?&gt;" class="&lt;?php echo $i == 0 ? 'active' : ''; ?&gt;"&gt;&lt;/li&gt;<br />
+				&nbsp;&nbsp;&nbsp;		&lt;?php $i++; endwhile; ?&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&lt;/ol&gt;<br />
+				<br />
+				&lt;!-- Wrapper for slides --&gt;<br />
+				&lt;div class="carousel-inner"&gt;<br />
+				&nbsp;&nbsp;&nbsp;		&lt;?php<br />
+				&nbsp;&nbsp;&nbsp;		$i = 0;<br />
+				&nbsp;&nbsp;&nbsp;		$slide_args = array(<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'post_type' => 'slide',<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'order'     => 'ASC',<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'post_per_page'=> '-1'<br />
+				&nbsp;&nbsp;&nbsp;		);<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			$slide = new WP_Query($slide_args);<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			while($slide->have_posts()) : $slide->the_post();<br />
+				&nbsp;&nbsp;&nbsp;		?&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			&lt;div class="item &lt;?php echo $i == 0 ? 'active' : ''; ?&gt;" style="background:url(&lt;?php the_post_thumbnail_url('full'); ?&gt;) center fixed no-repeat;background-size:cover !important; -webkit-background-size:cover !important; -o-background-size:cover !important; -moz-background-size:cover !important;"&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			&lt;/div&gt;<br />
+				&nbsp;&nbsp;&nbsp;		&lt;?php $i++; endwhile; ?&gt;<br />
+				&lt;/div&gt;<br />
+				<br />
+				&lt;!-- Left and right controls --&gt;<br />
+				&lt;a class="left carousel-control" href="#myCarousel" data-slide="prev"&gt;<br />
+				&nbsp;&nbsp;&nbsp;		&lt;span class="glyphicon glyphicon-chevron-left"&gt;&lt;/span&gt;<br />
+				&nbsp;&nbsp;&nbsp;		&lt;span class="sr-only"&gt;Previous&lt;/span&gt;<br />
+				&lt;/a&gt;<br />
+				&lt;a class="right carousel-control" href="#myCarousel" data-slide="next"&gt;<br />
+				&nbsp;&nbsp;&nbsp;		&lt;span class="glyphicon glyphicon-chevron-right"&gt;&lt;/span&gt;<br />
+				&nbsp;&nbsp;&nbsp;		&lt;span class="sr-only"&gt;Next&lt;/span&gt;<br />
+				&lt;/a&gt;<br />
+				&lt;/div&gt;</p>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 text-center">
+				<h1><strong>--- FUNCTIONS ---</strong></h1>
+			</div>
+
+			<div class="col-xs-12 col-sm-6">
+				<p><strong>AGREGAR CUSTOM POST TYPES</strong><br />
+					function agregar_xxxx() {<br />
+				&nbsp;&nbsp;&nbsp;	 $labels = array(<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'name'               => _x( 'xxxx', 'post type general name' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'singular_name'      => _x( 'xxxx', 'post type singular name' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'add_new'            => _x( 'Agregar nuevo', 'xxxx' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'add_new_item'       => __( 'Agregar nuevo xxxx' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'edit_item'          => __( 'Editar xxxx' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'new_item'           => __( 'Nuevo xxxx' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'all_items'          => __( 'Todos' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'view_item'          => __( 'Ver' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'search_items'       => __( 'Buscar' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'not_found'          => __( 'No hay xxxx' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'not_found_in_trash' => __( 'No hay xxxx en la Papelera' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'parent_item_colon'  => '',<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'menu_name'          => 'xxxx',<br />
+				&nbsp;&nbsp;&nbsp;	  );<br />
+				&nbsp;&nbsp;&nbsp;	  $args = array(<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'labels'        => $labels,<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'description'   => 'xxxx',<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'public'        => true,<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'menu_position' => 3,<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'menu_icon'     => 'dashicons-cart',<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'supports'      => array( 'title', 'editor', 'thumbnail', 'excerpt', 'comments', 'page-attributes', 'custom-fields' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;		'has_archive'   => true,<br />
+				&nbsp;&nbsp;&nbsp;	  );<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;	  register_post_type( 'xxxx', $args );<br />
+				&nbsp;&nbsp;&nbsp;	}<br />
+				&nbsp;&nbsp;&nbsp;	add_action( 'init', 'agregar_xxxx' );</p>
+
+				<p><strong>AGREGAR CUSTOM TAXONOMY</strong><br />
+				//Reemplazar POST_TYPE por el nombre del post type que se le agregará las categorías<br />
+				add_action( 'init', 'create_POST_TYPE_taxonomies', 0 );<br />
+				<br />
+				function create_POST_TYPE_taxonomies() {<br />
+				&nbsp;&nbsp;&nbsp;		$labels = array(<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'name'              => _x( 'Xxxxs', 'taxonomy general name' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'singular_name'     => _x( 'Xxxx', 'taxonomy singular name' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'search_items'      => __( 'Buscar Xxxxs' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'all_items'         => __( 'Todos Xxxxs' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'parent_item'       => __( 'Superior Xxxx' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'parent_item_colon' => __( 'Superior Xxxx:' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'edit_item'         => __( 'Editar Xxxx' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'update_item'       => __( 'Actualizar Xxxx' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'add_new_item'      => __( 'Agregar Nuevo Xxxx' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'new_item_name'     => __( 'Nuevo Nombre Xxxx' ),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'menu_name'         => __( 'Xxxx' ),<br />
+				&nbsp;&nbsp;&nbsp;		);<br />
+				<br />
+				&nbsp;&nbsp;&nbsp;		$args = array(<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'hierarchical'      => true,<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'labels'            => $labels,<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'show_ui'           => true,<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'show_admin_column' => true,<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'query_var'         => true,<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			'rewrite'           => array( 'slug' => 'xxxx' ),<br />
+				&nbsp;&nbsp;&nbsp;		);<br />
+				<br />
+				&nbsp;&nbsp;&nbsp;		register_taxonomy( 'xxxx', array( 'POST_TYPE' ), $args );<br />
+				}</p>
+
+				<p><strong>AGREGAR DIFERENTES THUMBNAIL EN FUNCTION</strong><br />
+				add_image_size( 'category-thumb', 300 ); <span>// 300 pixels ancho (y alto ilimitado)</span><br />
+				add_image_size( 'homepage-thumb', 220, 180, true ); <span>// (cropped)</span></p>
+
+				<p><strong>EXCERPT EN PAGES</strong><br />
+				Archivo functions.php agregar<br />
+				add_action( 'init', 'my_add_excerpts_to_pages' );<br />
+				&nbsp;&nbsp;&nbsp;	function my_add_excerpts_to_pages() {<br />
+				&nbsp;&nbsp;&nbsp;		add_post_type_support( 'page', 'excerpt' );<br />
+				}</p>
+
+				<p><strong>CARGAR LOS JS EN FORMA ASÍNCRONA</strong><br />
+				// Cargar de forma asincrona los JS<br />
+				function add_async_to_script($tag, $handle) {<br />
+				&nbsp;&nbsp;&nbsp;		// agregar los handles o identificadores de los scripts al array<br />
+				&nbsp;&nbsp;&nbsp;		$scripts_to_async = array('xxxx', 'xxxx'); <span>//wp_register_script('xxxx', 'nombre-js.js', '', '', true);</span><br />
+				<br />
+				&nbsp;&nbsp;&nbsp;		// recorremos el array y agregamos el atributo async defer<br />
+				&nbsp;&nbsp;&nbsp;		foreach($scripts_to_async as $async_script) {<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			if ($async_script === $handle) {<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;				return str_replace(' src', ' async defer src', $tag);<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			}<br />
+				&nbsp;&nbsp;&nbsp;		}<br />
+				&nbsp;&nbsp;&nbsp;		return $tag;<br />
+				}<br />
+				add_filter('script_loader_tag', 'add_async_to_script', 10, 2);</p>
+				
+				<p><strong>AGREGAR AVATAR A USUARIO DE WORDPRESS archivo functions.php</strong><br />
+				// Nuevo avatar misterioso<br />
+						add_filter('avatar_defaults', 'miavatar'); <br />
+						function miavatar ($avatar_defaults) { <br />
+				// Ruta a nuestra imagen (puede estar en el mismo servidor o en otro)<br />
+				$avatar = 'direccion URL de la foto'; <br />
+				// Nombre de nuestro avatar<br />
+				$avatar_defaults[$avatar] = &quot;Nombre del Avatar&quot;; <br />
+				return $avatar_defaults; <br />
+				} </p>
+
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<p><strong>CUSTOM POST TYPES FILTRAR POR CUSTOM TAXONOMY</strong><br />
+				// Display a custom taxonomy dropdown in admin<br />
+				add_action('restrict_manage_posts', 'tsm_filter_post_type_by_taxonomy');<br />
+				function tsm_filter_post_type_by_taxonomy() {<br />
+				&nbsp;&nbsp;&nbsp;		global $typenow;<br />
+				&nbsp;&nbsp;&nbsp;		$post_type = 'XXXX'; // Cambiar al nombre del custom post type<br />
+				&nbsp;&nbsp;&nbsp;		$taxonomy  = 'XXXX'; // Cambiar al nombre del custom taxonomy<br />
+				&nbsp;&nbsp;&nbsp;		if ($typenow == $post_type) {<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			$selected      = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			$info_taxonomy = get_taxonomy($taxonomy);<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			wp_dropdown_categories(array(<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;				'show_option_all' => __("Show All {$info_taxonomy->label}"),<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;				'taxonomy'        => $taxonomy,<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;				'name'            => $taxonomy,<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;				'orderby'         => 'name',<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;				'selected'        => $selected,<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;				'show_count'      => true,<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;				'hide_empty'      => true,<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			));<br />
+				&nbsp;&nbsp;&nbsp;		};<br />
+				}<br />
+				<br />
+				// Filter posts by taxonomy in admin<br />
+				add_filter('parse_query', 'tsm_convert_id_to_term_in_query');<br />
+				function tsm_convert_id_to_term_in_query($query) {<br />
+				&nbsp;&nbsp;&nbsp;		global $pagenow;<br />
+				&nbsp;&nbsp;&nbsp;		$post_type = 'XXXX'; // Cambiar al nombre del custom post type<br />
+				&nbsp;&nbsp;&nbsp;		$taxonomy  = 'XXXX'; // Cambiar al nombre del custom taxonomy<br />
+				&nbsp;&nbsp;&nbsp;		$q_vars    = &$query->query_vars;<br />
+				&nbsp;&nbsp;&nbsp;		if ( $pagenow == 'edit.php' && isset($q_vars['post_type']) && $q_vars['post_type'] == $post_type && isset($q_vars[$taxonomy]) && is_numeric($q_vars[$taxonomy]) && $q_vars[$taxonomy] != 0 ) {<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			$term = get_term_by('id', $q_vars[$taxonomy], $taxonomy);<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;			$q_vars[$taxonomy] = $term->slug;<br />
+				&nbsp;&nbsp;&nbsp;		}<br />
+				}</p>
+
+				<p><strong>CARGAR JQUERY</strong><br />
+				<i>(function.php)</i><br />
+				if( !is_admin()) {<br />
+						wp_deregister_script('jquery');<br />
+						wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', false, '1.7.2', true);<br />
+						wp_enqueue_script('jquery');<br />
+						}</p>
+
+				<p><strong>OCULTAR PÁGINAS DEL BACKEND PARA QUE NINGÚN USUARIO LAS VEA</strong><br />
+				<span>// Ocultar algunas páginas de la lista en el editor</span><br />
+				function mytheme_hide_pages( $query ) {<br />
+				&nbsp;&nbsp;&nbsp;	if ( !is_admin() )<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;	    return $query;<br />
+				&nbsp;&nbsp;&nbsp;	global $pagenow;<br />
+				&nbsp;&nbsp;&nbsp;	if ( 'edit.php' == $pagenow && ( get_query_var('post_type') && 'page' == get_query_var('post_type') ) )<br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;	<span>// Ocultamos la lista de páginas especificadas (IDs) en el array</span><br />
+				&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;	$query->set( 'post__not_in', array(xxxx,xxxx) );<br />
+				&nbsp;&nbsp;&nbsp;	return $query;<br />
+				}<br />
+				add_action( 'pre_get_posts' ,'mytheme_hide_pages' );
+				</p>
+
+				<p><strong>RENOMBRAR EL NOMBRE DE MENÚ POST O ENTRADAS POR NOTICIAS</strong><br />
+					function modificar_post_label() {<br />
+					&nbsp;&nbsp;&nbsp;    global $menu;<br />
+					&nbsp;&nbsp;&nbsp;    global $submenu;<br />
+					&nbsp;&nbsp;&nbsp;    $menu[5][0] = 'Noticias';<br />
+					&nbsp;&nbsp;&nbsp;    $submenu['edit.php'][5][0] = 'Noticias';<br />
+					&nbsp;&nbsp;&nbsp;    $submenu['edit.php'][10][0] = 'A&ntilde;adir Noticias';<br />
+					&nbsp;&nbsp;&nbsp;    echo '';<br />
+					}<br />
+					function modificar_post_object() {<br />
+					&nbsp;&nbsp;&nbsp;    global $wp_post_types;<br />
+					&nbsp;&nbsp;&nbsp;    $labels = &$wp_post_types['post']->labels;<br />
+					&nbsp;&nbsp;&nbsp;    $labels->name = 'Noticias';<br />
+					&nbsp;&nbsp;&nbsp;    $labels->singular_name = 'Noticia';<br />
+					&nbsp;&nbsp;&nbsp;    $labels->add_new = 'A&ntilde;adir Nueva';<br />
+					&nbsp;&nbsp;&nbsp;    $labels->add_new_item = 'A&ntilde;adir Nueva Noticia';<br />
+					&nbsp;&nbsp;&nbsp;    $labels->edit_item = 'Editar Noticia';<br />
+					&nbsp;&nbsp;&nbsp;    $labels->new_item = 'Nueva Noticia';<br />
+					&nbsp;&nbsp;&nbsp;    $labels->view_item = 'Ver Noticia';<br />
+					&nbsp;&nbsp;&nbsp;    $labels->search_items = 'Buscar Noticias';<br />
+					&nbsp;&nbsp;&nbsp;    $labels->not_found = 'No se han encontrado Noticias';<br />
+					&nbsp;&nbsp;&nbsp;    $labels->not_found_in_trash = 'No se han encontrado Noticias en la papelera';<br />
+					&nbsp;&nbsp;&nbsp;    $labels->all_items = 'Todas las Noticias';<br />
+					&nbsp;&nbsp;&nbsp;    $labels->menu_name = 'Noticias';<br />
+					&nbsp;&nbsp;&nbsp;    $labels->name_admin_bar = 'Noticias';<br />
+					}<br />
+					add_action( 'admin_menu', 'modificar_post_label' );<br />
+					add_action( 'init', 'modificar_post_object' );					
+				</p>
+
+				<p><strong>DESHABILITAR ACTUALIZACIÓN AUTOMÁTICA WORDPRESS archivo wp-config.php</strong><br />
+				define( 'AUTOMATIC_UPDATER_DISABLED', true ); <span>// Deshabilitar las actualizaciones automáticas.</span></p>
+			</div>
+
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 text-center">
+				<h1><strong>--- CONDICIONALES ---</strong></h1>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<p><strong>SIDEBAR DIFERENTES PARA LAS NOTICIAS SE MODIFICA POR EL &lt;?php get_sidebar(); ?&gt; EN EL ARCHIVO single.php</strong><br />
+				&lt;?php if (in_category('7') ) ;?&gt; <br />
+				&nbsp;&nbsp;&nbsp;	&lt;?php include 'sidebar-a.php';?&gt;<br />
+				&lt;?php elseif (in_category('8') ) ;?&gt; <br />
+				&nbsp;&nbsp;&nbsp;	&lt;?php include 'sidebar-b.php';?&gt;<br />
+				&lt;?php endif ;?&gt;</p>
+
+				<p><strong> MOSTRAR INFORMACIÓN SI EXISTE</strong><br />
+				&lt;?php if ($variable o post_ID o in_category(3) ) : ?&gt;<br />
+				&nbsp;&nbsp;&nbsp;	// Mostrar información <br />
+				&lt;?php endif; ?&gt;</p>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<p><strong> DIFERENTES CLASES PARA DIFERENTES CATEGORÍAS</strong><br />
+				&lt;?php if (in_category(2) ) ; ?&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&lt;div class=&quot;class-a&quot;&gt;Categoria A&lt;/div&gt;<br />
+				&lt;?php elseif (in_category(3) ) ;?&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&lt;div class=&quot;class-a&quot;&gt;Categoria B&lt;/div&gt;<br />
+				&lt;?php elseif (in_category(4) ) ;?&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&lt;div class=&quot;class-a&quot;&gt;Categoria C&lt;/div&gt;<br />
+				&lt;?php elseif (in_category(5) ) ;?&gt;<br />
+				&nbsp;&nbsp;&nbsp;	&lt;div class=&quot;class-a&quot;&gt;Categoria D&lt;/div&gt;<br />
+				&lt;?php endif; ?&gt;</p>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 text-center">
+				<h1><strong>--- HTACCESS ---</strong></h1>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<p><strong>ESTABLECER CADUCIDAD DEL CACHÉ</strong><br />
+				&lt;IfModule mod_expires.c&gt;<br />
+					ExpiresActive On<br />
+					ExpiresDefault "access plus 1 day"<br />
+					ExpiresByType text/css "access plus 1 week"<br />
+					ExpiresByType image/gif "access plus 1 month"<br />
+					ExpiresByType image/png "access plus 1 month"<br />
+					ExpiresByType image/jpeg "access plus 1 month"<br />
+				&lt;/IfModule&gt;</p>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 text-center">
+				<h1><strong>--- WOOCOMMERCE ---</strong></h1>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<span>En functions.php agregar para eliminar el requerido del formulario</span><br />
+				<p>// Hook in<br />
+				add_filter( 'woocommerce_default_address_fields' , 'custom_override_default_address_fields' );</p>
+				<p>// Our hooked in function - $address_fields is passed via the filter!<br />
+						function custom_override_default_address_fields( $address_fields ) {<br />
+						$address_fields['state']['required'] = false;<br />
+						$address_fields['postcode']['required'] = false;</p>
+				<p> return $address_fields;<br />
+						}</p>
+
+				<span>En functions.php agregar para editar Productos Relacionados</span>v
+				<p>remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products',20);<br />
+						remove_action( 'woocommerce_after_single_product', 'woocommerce_output_related_products',10);<br />
+				add_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);</p>
+				<p>function woocommerce_output_related_products() {<br />
+						$output = null;</p>
+				<p> ob_start();<br />
+						woocommerce_related_products(4,4); <br />
+						$content = ob_get_clean();<br />
+						if($content) { $output .= $content; }</p>
+				<p> echo '&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;' . $output;<br />
+						}</p>
+
+				<span>En functions.php agregar para editar Productos Relacionados</span><br />
+				<p>remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products',20);<br />
+						remove_action( 'woocommerce_after_single_product', 'woocommerce_output_related_products',10);<br />
+				add_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);</p>
+				<p>function woocommerce_output_related_products() {<br />
+						$output = null;</p>
+				<p> ob_start();<br />
+						woocommerce_related_products(4,4); <br />
+						$content = ob_get_clean();<br />
+						if($content) { $output .= $content; }</p>
+				<p> echo '&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;' . $output;<br />
+						}</p>
+
+				<span>Eliminar campos de la orden de productos en fuctions.php</span><br />
+				<p>// Modify the default WooCommerce orderby dropdown<br />
+						//<br />
+						// Options: menu_order, popularity, rating, date, price, price-desc<br />
+						function my_woocommerce_catalog_orderby( $orderby ) {<br />
+				unset($orderby[&quot;popularity&quot;]);<br />
+				unset($orderby[&quot;rating&quot;]);<br />
+				unset($orderby[&quot;date&quot;]);<br />
+				return $orderby;<br />
+				}<br />
+				add_filter( &quot;woocommerce_catalog_orderby&quot;, &quot;my_woocommerce_catalog_orderby&quot;, 20 );</p>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<span>Eliminar campos del formulario en fuctions.php</span><br />
+				<p>add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields' );<br />
+						function custom_override_checkout_fields( $fields ) {<br />
+						unset($fields['billing']['billing_first_name']);<br />
+						unset($fields['billing']['billing_last_name']);<br />
+						unset($fields['billing']['billing_company']);<br />
+						unset($fields['billing']['billing_address_1']);<br />
+						unset($fields['billing']['billing_address_2']);<br />
+						unset($fields['billing']['billing_city']);<br />
+						unset($fields['billing']['billing_postcode']);<br />
+						unset($fields['billing']['billing_country']);<br />
+						unset($fields['billing']['billing_state']);<br />
+						unset($fields['billing']['billing_phone']);<br />
+						unset($fields['order']['order_comments']);<br />
+						unset($fields['billing']['billing_address_2']);<br />
+						unset($fields['billing']['billing_postcode']);<br />
+						unset($fields['billing']['billing_company']);<br />
+						unset($fields['billing']['billing_last_name']);<br />
+						unset($fields['billing']['billing_email']);<br />
+						unset($fields['billing']['billing_city']);<br />
+						return $fields;<br />
+				}</p>
+
+				<span>En functions.php agregar para editar Cantidad de Productos por página</span><br />
+				<p>// Display 24 products per page. Goes in functions.php<br />
+				add_filter( 'loop_shop_per_page', create_function( '$cols', 'return 24;' ), 20 );</p>
+
+				<span>Quitar comentarios woocommerce </span><br /> 
+				add_filter( 'woocommerce_product_tabs', 'sb_woo_remove_reviews_tab', 98);<br />
+				function sb_woo_remove_reviews_tab($tabs) {  <br />
+				unset($tabs['reviews']);  <br />
+				return $tabs;  
+				} </p>
+
+				<span>Remover botón agregar al carro en listado de productos</span><br />
+				<p>function remove_loop_button(){<br />
+				remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );<br />
+				}<br />
+				add_action('init','remove_loop_button');</p>
+
+				<span>Enviar a un Estado específico.</span><br />
+				<p>// send specific state<br />
+					<br />
+					function only_ship_to_pa( $rates, $package ) {<br />
+					global $woocommerce;<br />
+					$excluded_states = array( 'I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XII','XIV','XV' );<br />
+					if( in_array( WC()-&gt;customer-&gt;shipping_state, $excluded_states ) ) {<br />
+				$rates = array();<br />
+				}<br />
+				return $rates;<br />
+				}<br />
+				<br />
+				add_filter( 'woocommerce_package_rates', 'only_ship_to_pa', 10, 2 );</p>
+
+				<span>Eliminar productos relacionados en fuctions.php</span><br />
+				<p>remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);</p>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 text-center">
+				<h1><strong>--- PLUGINS WORDPRESS ---</strong></h1>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<p><strong>CONTACT FORM PHP</strong><br />
+				&lt;?php echo do_shortcode( '[contact-form-7 id=&quot;1234&quot; title=&quot;NOMBRE-FORMULARIO&quot;]' ); ?&gt;</p>
+
+				<p><strong>QTRANSLATEX</strong><br>
+				&lt;?php echo __('[:es]Español[:en]English'); ?&gt;</p>
+
+				<p><strong>EC-STARS-RATING (Estrellas para votar)</strong><br />
+				&lt;?php if(function_exists('ec_stars_rating')) {ec_stars_rating(); }?&gt;</p>
+
+				<p><strong>WP-POSTRATINGS (Estrellas para votar)</strong><br />
+				&lt;?php if(function_exists('the_ratings')) { the_ratings(); } ?&gt;</p>
+
+				<p><strong>CATEGORY THUMBNAILS</strong><br />
+				</p>
+				<p>Descargar plugin <a href="https://wordpress.org/plugins/category-thumbnails/" target="_blank">aquí</a></p>
+				<p><span>En archivo functions.php agregar</span><br />
+				add_theme_support('category-thumbnails');</p>
+
+				<p><strong>SLIDEZOOM (Zoom en la imagen)</strong><br />
+				&lt;a class=&quot;highslide&quot; title=&quot;&quot; onclick=&quot;return hs.expand(this)&quot; href=&quot;&quot; target=&quot;_blank&quot;&gt;&lt;img class=&quot;alignleft size-full wp-image-603&quot; title=&quot;&quot; src=&quot;&quot; alt=&quot;&quot; width=&quot;100&quot; height=&quot;100&quot; /&gt;&lt;/a&gt;</p>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<strong>HG SLIDERl</strong><br />
+				&lt;?php if(function_exists('show_flexslider_rotator')) echo show_flexslider_rotator( 'homepage' );?&gt;</p>
+
+				<p><strong>CYCLONE SLIDER 2</strong><br />  
+				&lt;?php if( function_exists('cyclone_slider') ) cyclone_slider('inicio'); ?&gt;</p>
+
+				<p><strong>EASING SLIDER</strong><br />  
+				&lt;?php if (function_exists('easing_slider')){ easing_slider(); }; ?&gt;</p>
+
+				<p><strong>CONTENT SLIDER</strong><br />
+				&lt;?php if(function_exists('wp_content_slider')) { wp_content_slider(); } ?&gt;</p>
+
+				<p><strong>SMOOTH SLIDER</strong><br />
+				&lt;?php if ( function_exists( 'get_smooth_slider' ) ) {  get_smooth_slider(); }?&gt;</p>
+
+				<p><strong>RESPONSIVE SLIDER</strong><br />
+				&lt;?php echo do_shortcode( '[responsive_slider]' ); ?&gt;</p>
+
+				<p><strong>SLIDER POST</strong><br />
+				&lt;?php if (function_exists('rps_show')) echo rps_show(); ?&gt;</p>
+
+			</div>
+		</div>
+		<hr>
+	</div><!-- content -->
+</body>
+</html>
